@@ -253,11 +253,11 @@ QPDFFormFieldObjectHelper::isChecked()
     return isCheckbox() && getValue().isName() && (getValue().getName() != "/Off");
 }
 
-bool
-QPDFFormFieldObjectHelper::isRadioButton()
+bool QPDFFormFieldObjectHelper::isRadioButton()
 {
-    return ((getFieldType() == "/Btn") && ((getFlags() & ff_btn_radio) == ff_btn_radio));
+    return ((getFieldType() == "/Btn") && (static_cast<unsigned int>(getFlags()) & static_cast<unsigned int>(ff_btn_radio)) == static_cast<unsigned int>(ff_btn_radio));
 }
+
 
 bool
 QPDFFormFieldObjectHelper::isPushbutton()
