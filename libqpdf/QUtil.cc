@@ -1792,8 +1792,7 @@ QUtil::pdf_doc_to_utf8(std::string const& val)
     return result;
 }
 
-void
-QUtil::analyze_encoding(
+void QUtil::analyze_encoding(
     std::string const& val, bool& has_8bit_chars, bool& is_valid_utf8, bool& is_utf16)
 {
     has_8bit_chars = is_utf16 = is_valid_utf8 = false;
@@ -1812,7 +1811,7 @@ QUtil::analyze_encoding(
         if (error) {
             any_errors = true;
         }
-        if (pos - o_pos > 1 || val[o_pos] & 0x80) {
+        if (pos - o_pos > 1 || static_cast<unsigned char>(val[o_pos]) & 0x80) {
             has_8bit_chars = true;
         }
     }
@@ -1820,6 +1819,7 @@ QUtil::analyze_encoding(
         is_valid_utf8 = true;
     }
 }
+
 
 std::vector<std::string>
 QUtil::possible_repaired_encodings(std::string supplied)
