@@ -131,10 +131,9 @@ Pl_Base64::flush_decode()
     next()->write(out, QIntC::to_size(3 - pad));
 }
 
-void
-Pl_Base64::flush_encode()
+void Pl_Base64::flush_encode()
 {
-    int outval = ((buf[0] << 16) | (buf[1] << 8) | (buf[2]));
+    unsigned int outval = ((static_cast<unsigned int>(buf[0]) << 16) | (static_cast<unsigned int>(buf[1]) << 8) | static_cast<unsigned int>(buf[2]));
     unsigned char out[4] = {
         to_uc(outval >> 18),
         to_uc(0x3f & (outval >> 12)),
@@ -163,6 +162,7 @@ Pl_Base64::flush_encode()
     }
     next()->write(out, 4);
 }
+
 
 void
 Pl_Base64::finish()
