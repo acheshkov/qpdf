@@ -241,11 +241,14 @@ QPDFFormFieldObjectHelper::isText()
     return (getFieldType() == "/Tx");
 }
 
-bool
-QPDFFormFieldObjectHelper::isCheckbox()
+bool QPDFFormFieldObjectHelper::isCheckbox()
 {
-    return ((getFieldType() == "/Btn") && ((getFlags() & (ff_btn_radio | ff_btn_pushbutton)) == 0));
+    return ((getFieldType() == "/Btn") &&
+            (static_cast<unsigned int>(getFlags()) &
+             (static_cast<unsigned int>(ff_btn_radio) |
+              static_cast<unsigned int>(ff_btn_pushbutton))) == 0);
 }
+
 
 bool
 QPDFFormFieldObjectHelper::isChecked()
